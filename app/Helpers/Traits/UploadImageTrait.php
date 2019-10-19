@@ -6,19 +6,10 @@ use Illuminate\Http\UploadedFile;
 trait UploadImageTrait
 {
 
-    public function uploadAvatar($avatar)
-    {
-        $name = time().$avatar->getClientOriginalName();
-        $folder = '/uploads/images/avatars/';
-        $filePath = $folder . $name;
-        $this->uploadOne($avatar, $folder, 'public', $name);
-        return $filePath;
-    }
-
-    public function uploadCertificate($image)
+    public function upload($image)
     {
         $name = time().$image->getClientOriginalName();
-        $folder = '/uploads/images/certificates/';
+        $folder = '/uploads/images/';
         $filePath = $folder . $name;
         $this->uploadOne($image, $folder, 'public', $name);
         return $filePath;
@@ -28,7 +19,7 @@ trait UploadImageTrait
     {
         $name = !is_null($filename) ? $filename : str_random(25);
 
-        $file = $uploadedFile->storeAs($folder, $name.'.'.$uploadedFile->getClientOriginalExtension(), $disk);
+        $file = $uploadedFile->storeAs($folder, $name, $disk);
 
         return $file;
     }
