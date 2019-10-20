@@ -39,7 +39,11 @@ Route::group([
     Route::post('/', 'CategoryController@create');
     Route::put('/{id}', 'CategoryController@update');
     Route::delete('/{id}', 'CategoryController@delete');
+
+
 });
+
+Route::post('/customer/create', 'CustomerController@create');
 
 Route::group([
     'middleware' => 'auth:api',
