@@ -31,7 +31,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => 'auth:api',
+    'middleware' => 'auth.role:0',
     'prefix' => 'category'
 ],  function ($router) {
     Route::get('/', 'CategoryController@index');
@@ -46,7 +46,7 @@ Route::group([
 Route::post('/customer/create', 'CustomerController@create');
 
 Route::group([
-    'middleware' => 'auth:api',
+    'middleware' => 'auth.role:0',
     'prefix' => 'product'
 ],  function ($router) {
     Route::get('/', 'ProductController@index');
