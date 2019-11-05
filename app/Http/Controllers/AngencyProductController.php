@@ -3,33 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\AgencyService;
-use App\Http\Requests\Agency\UpdateAgencyRequest;
-use App\Http\Requests\Agency\CreateAgencyRequest;
+use App\Http\Services\AngencyProductService;
+use App\Http\Requests\AngencyProduct\UpdateAngencyProducRequest;
+use App\Http\Requests\AngencyProduct\CreateAngencyProducRequest;
 
-
-class AgencyController extends Controller
+class AngencyProductController extends Controller
 {
-    //
+    //AngencyProduc
     protected $service;
-    public function __construct(AgencyService $agencyService)
+    public function __construct(AngencyProductService $angencyproductService)
     {
-        $this->service = $agencyService;
+        $this->service = $angencyproductService;
     }
     public function index(Request $request)
     {
         return $this->service->index($request); 
-        
     }
     public function detail($id)
     {
         return $this->service->detail($id);
     }
-    public function create(CreateAgencyRequest $request)
+    public function create(CreateAngencyProducRequest $request)
     {
         return $this->service->create($request);        
     }
-    public function update(UpdateAgencyRequest $request)
+    public function update(UpdateAngencyProducRequest $request)
     {
         return $this->service->update($request);
     }
