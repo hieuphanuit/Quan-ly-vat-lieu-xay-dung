@@ -39,14 +39,20 @@ Route::group([
     Route::post('/', 'CategoryController@create');
     Route::put('/{id}', 'CategoryController@update');
     Route::delete('/{id}', 'CategoryController@delete');
-
-
 });
 
-Route::post('/customer/create', 'CustomerController@create');
+Route::group([
+   // 'middleware' => 'auth.role:2',      //business staff
+    'prefix' => 'customer'
+],  function ($router) {
+    Route::post('/create', 'CustomerController@create');
+    Route::delete('/{id}', 'CustomerController@delete');
+    Route::put('/{id}', 'CustomerController@update');
+});
+
 
 Route::group([
-    'middleware' => 'auth.role:0',
+    'middleware' => 'auth.role:2',      //business staff
     'prefix' => 'product'
 ],  function ($router) {
     Route::get('/', 'ProductController@index');

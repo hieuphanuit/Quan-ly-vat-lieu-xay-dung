@@ -15,38 +15,23 @@ class CustomerService
         $customer = Customer::create($data);
 
         return response()
-            ->json(['message' => 'Create products Success']);
+            ->json($customer);
     }
 
     public function update($request)
     {
         $data = $request->all();
-        $product = Product::find($request->id);
-        $product->update($data);
-
-        $categories = $request->get('categories');
-        $product->categories()->sync($categories);
-
-        $images = $request->file('images');
-
-        if($request->hasFile('images'))
-        {
-            foreach ($images as $image) {
-                $path = $this->upload($image);
-                $product->images()->create([
-                    'image' => $path
-                ]);
-            }
-        }
+        $customer = Customer::find($request->id);
+        $customer->update($data);
 
         return response()
-            ->json($product);
+            ->json($customer);
     }
 
     public function delete($id)
     {
-        $product = Product::find($id);
-        $product->delete();
+        $customer = Customer::find($id);
+        $customer->delete();
 
         return response()
             ->json('Success');
