@@ -42,7 +42,7 @@ Route::group([
 });
 
 Route::group([
-   // 'middleware' => 'auth.role:2',      //business staff
+   'middleware' => 'auth.role:2',      //business staff
     'prefix' => 'customer'
 ],  function ($router) {
     Route::post('/create', 'CustomerController@create');
