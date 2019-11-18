@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Services;
 
+use App\SellingBill;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
-use App\Entities\SellingBill;
 
-class SellingBillService 
+
+class SellingBillService
 {
     public function index($request)
     {
@@ -14,7 +15,7 @@ class SellingBillService
         $SellingBill = SellingBill::paginate($limit);
 
         return response()
-            ->json($SellingBill); 
+            ->json($SellingBill);
     }
 
     public function detail($id)
@@ -27,11 +28,7 @@ class SellingBillService
 
     public function create($request)
     {
-        $data = $request->all();
-        $SellingBill = SellingBill::create($data);
-
-        return response()
-            ->json($SellingBill);
+       return SellingBill::create($request);
     }
 
     public function update($request)

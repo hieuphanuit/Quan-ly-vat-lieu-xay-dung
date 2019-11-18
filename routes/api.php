@@ -43,11 +43,18 @@ Route::group([
 
 Route::group([
    'middleware' => 'auth.role:2',      //business staff
-    'prefix' => 'customer'
-],  function ($router) {
-    Route::post('/create', 'CustomerController@create');
+    'prefix' => 'customer'],  function ($router) {
+    Route::post('', 'CustomerController@create');
     Route::delete('/{id}', 'CustomerController@delete');
     Route::put('/{id}', 'CustomerController@update');
+});
+
+Route::group([
+    'middleware' => 'auth.role:2',      //business staff
+    'prefix' => 'selling-bill'],  function ($router) {
+    Route::post('', 'SellingBillController@create');
+    Route::delete('/{id}', 'SellingBillController@delete');
+    Route::put('/{id}', 'SellingBillController@update');
 });
 
 

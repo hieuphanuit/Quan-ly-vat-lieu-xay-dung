@@ -19,7 +19,7 @@ class ProductService {
         $categories = $request->get('categories');
 
         $productQuery = Product::query();
-        
+
         if ($keyword) {
             $productQuery->where('name', 'like', "%{$keyword}%");
         }
@@ -45,7 +45,7 @@ class ProductService {
         $product = $productQuery->paginate($limit);
 
         return response()
-            ->json($product); 
+            ->json($product);
     }
 
     public function detail($id)
@@ -72,7 +72,7 @@ class ProductService {
             foreach ($images as $image) {
                 $path = $this->upload($image);
                 $product->images()->create([
-                    'image' => $path 
+                    'image' => $path
                 ]);
             }
         }
@@ -97,7 +97,7 @@ class ProductService {
             foreach ($images as $image) {
                 $path = $this->upload($image);
                 $product->images()->create([
-                    'image' => $path 
+                    'image' => $path
                 ]);
             }
         }

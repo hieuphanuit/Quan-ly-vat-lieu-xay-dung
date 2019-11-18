@@ -24,10 +24,10 @@ class CreateSellingBillRequest extends FormRequest
     public function rules()
     {
         return [
-            'total_amount' => 'integer|min:0',
+            'total_amount' => 'integer|default:null|min:0',
             'total_paid' => 'integer|min:0',
             'customer_id'   => 'integer|require|min:0',
-            'status'    => 'integer|default:0'
+            'status'    => 'integer|default:null'
         ];
     }
 }
