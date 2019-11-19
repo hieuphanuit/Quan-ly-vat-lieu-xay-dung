@@ -10,10 +10,11 @@ class CategoryService {
 
     public function index($request)
     {
-        $tree = Category::get()->toTree();
+        $limit = $request->get('limit', 1);
+        $categories = Category::withDepth()->paginate($limit);
 
         return response()
-            ->json($tree); 
+            ->json($categories); 
     }
 
     public function detail($id)
@@ -50,6 +51,13 @@ class CategoryService {
 
         return response()
             ->json('Success');
+    }
+
+    public function selectList()
+    {
+        $categories = Category::select('name', 'id')->get();
+        return response()
+            ->json($categories);
     }
 }
 

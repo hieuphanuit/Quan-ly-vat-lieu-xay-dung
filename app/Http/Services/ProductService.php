@@ -18,7 +18,7 @@ class ProductService {
         $priceTo = $request->get('price_to');
         $categories = $request->get('categories');
 
-        $productQuery = Product::query();
+        $productQuery = Product::with(['categories', 'images']);
         
         if ($keyword) {
             $productQuery->where('name', 'like', "%{$keyword}%");
@@ -101,6 +101,9 @@ class ProductService {
                 ]);
             }
         }
+
+        $deleteImages = $request->get('delete_images', []);
+        $product->images()->whereIn('id', $deleteImages)->delete();
 
         return response()
             ->json($product);

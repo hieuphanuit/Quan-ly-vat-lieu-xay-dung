@@ -41,4 +41,9 @@ class CategoryController extends Controller
     {
         return $this->service->delete($id);
     }
+
+    public function selectList()
+    {
+        return $this->service->selectList();
+    }
 }
