@@ -26,12 +26,7 @@ class UpdateAgencyRequest extends FormRequest
         return [
             'name' => 'string',
             'address' => 'string',
-<<<<<<< HEAD
             'phone' => 'string',
-=======
-            'phone' => 'min:10|string',
-
->>>>>>> Duc_Nguyen
         ];
     }
 }

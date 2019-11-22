@@ -27,13 +27,6 @@ class CreateAgencyRequest extends FormRequest
             'name' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string',
-<<<<<<< HEAD
-=======
-            // 'categories' => 'required|array',
-            // 'categories.*' => 'required|integer|exists:categories,id',
-            // 'images' => 'array',
-            // 'images.*' => 'image'
->>>>>>> Duc_Nguyen
         ];
     }
 }
