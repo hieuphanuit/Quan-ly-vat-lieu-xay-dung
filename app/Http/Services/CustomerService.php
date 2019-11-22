@@ -8,6 +8,23 @@ use App\Entities\Customer;
 
 class CustomerService
 {
+    public function index($request)
+    {
+        $limit = $request->get('limit', 10);
+
+        $customer = Customer::paginate($limit);
+
+        return response()
+            ->json($customer); 
+    }
+
+    public function detail($id)
+    {
+        $customer = Customer::find($id);
+
+        return response()
+            ->json($customer);
+    }
 
     public function create($request)
     {

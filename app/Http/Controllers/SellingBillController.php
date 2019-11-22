@@ -32,9 +32,7 @@ class SellingBillController extends Controller
     {
         $user = auth()->user();
         $data = $request->all();
-
         $totalAmount = 0;
-
 
         $sellingBill = $this->service->create([
             'created_by' => $user->id,
@@ -61,7 +59,7 @@ class SellingBillController extends Controller
            'status' => $status
         ]);
 
-        return response()->json(['data' => $data]);
+        return response()->json($sellingBill);
     }
 
 

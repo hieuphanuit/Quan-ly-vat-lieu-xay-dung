@@ -53,57 +53,35 @@ Route::group(['middleware' => 'api'], function () {
         Route::put('/{id}', 'ProductController@update');
         Route::delete('/{id}', 'ProductController@delete');
     });
-});
 
-Route::group([
-    'middleware' => 'auth:api',
-    'prefix' => 'auth'
-],  function ($router) {
-    Route::post('/logout', 'AuthController@logout');
-    Route::post('/refresh', 'AuthController@refresh');
-    Route::post('/info', 'AuthController@info');
-});
-
-
-Route::group([
-    'middleware' => 'auth.role:0',
-    'prefix' => 'category'
-],  function ($router) {
-    Route::get('/', 'CategoryController@index');
-    Route::get('/{id}', 'CategoryController@detail');
-    Route::post('/', 'CategoryController@create');
-    Route::put('/{id}', 'CategoryController@update');
-    Route::delete('/{id}', 'CategoryController@delete');
-});
-
-Route::group([
-   'middleware' => 'auth.role:2',      //business staff
-    'prefix' => 'customer'],  function ($router) {
-    Route::post('', 'CustomerController@create');
-    Route::delete('/{id}', 'CustomerController@delete');
-    Route::put('/{id}', 'CustomerController@update');
+    Route::group([
+        'middleware' => 'auth.role:0',      //business staff
+        'prefix' => 'customer'
+    ],  function ($router) {
+        Route::get('/', 'CustomerController@index');
+        Route::get('/{id}', 'CustomerController@detail');
+        Route::post('', 'CustomerController@create');
+        Route::put('/{id}', 'CustomerController@update');
+        Route::delete('/{id}', 'CustomerController@delete');
+    });
 });
 
 Route::group([
     'middleware' => 'auth.role:2',      //business staff
-    'prefix' => 'selling-bill'],  function ($router) {
+    'prefix' => 'selling-bill'
+],  function ($router) {
     Route::post('', 'SellingBillController@create');
     Route::delete('/{id}', 'SellingBillController@delete');
     Route::put('/{id}', 'SellingBillController@update');
 });
 
-
 Route::group([
-    'middleware' => 'auth.role:2',      //business staff
-    'prefix' => 'product'
+    'middleware' => 'auth.role:0',
+    'prefix' => 'agency'
 ],  function ($router) {
-    Route::get('/', 'ProductController@index');
-    Route::get('/{id}', 'ProductController@detail');
-    Route::post('/', 'ProductController@create');
-    Route::put('/{id}', 'ProductController@update');
-    Route::delete('/{id}', 'ProductController@delete');
+    Route::get('/', 'AgencyController@index');
+    Route::get('/{id}', 'AgencyController@detail');
+    Route::post('/', 'AgencyController@create');
+    Route::put('/{id}', 'AgencyController@update');
+    Route::delete('/{id}', 'AgencyController@delete');
 });
-
-
-
-
