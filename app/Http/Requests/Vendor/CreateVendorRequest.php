@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Agency;
+namespace App\Http\Requests\Vendor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAgencyRequest extends FormRequest
+class CreateVendorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,13 +27,11 @@ class CreateAgencyRequest extends FormRequest
             'name' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string',
-<<<<<<< HEAD
-=======
+            'email' => 'required|string',
             // 'categories' => 'required|array',
             // 'categories.*' => 'required|integer|exists:categories,id',
             // 'images' => 'array',
             // 'images.*' => 'image'
->>>>>>> Duc_Nguyen
         ];
     }
 }

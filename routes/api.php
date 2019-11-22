@@ -85,3 +85,26 @@ Route::group([
     Route::put('/{id}', 'AgencyController@update');
     Route::delete('/{id}', 'AgencyController@delete');
 });
+
+Route::group([
+   'middleware' => 'auth.role:0',
+    'prefix' => 'vendors'
+], function (){
+    Route::post('/','VendorController@create');
+    Route::delete('/{id}','VendorController@delete');
+    Route::get('/','VendorController@index');
+    Route::get('/{id}','VendorController@detail');
+    Route::put('/{id}','VendorController@update');
+});
+
+Route::group([
+   // 'middleware' => 'auth.role:0',
+    'prefix' =>  'angency-product'
+],function(){
+    Route::post('/','AngencyProductController@create');
+    Route::delete('/{id}','AngencyProductController@delete');
+    Route::get('/','AngencyProductController@index');
+    Route::get('/{id}','AngencyProductController@detail');
+    Route::put('/{id}','AngencyProductController@update');
+});
+

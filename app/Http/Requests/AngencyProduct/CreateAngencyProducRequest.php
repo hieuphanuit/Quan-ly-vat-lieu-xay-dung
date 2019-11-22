@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Agency;
+namespace App\Http\Requests\AngencyProduct;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAgencyRequest extends FormRequest
+class CreateAngencyProducRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,9 @@ class UpdateAgencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string',
-            'address' => 'string',
-<<<<<<< HEAD
-            'phone' => 'string',
-=======
-            'phone' => 'min:10|string',
-
->>>>>>> Duc_Nguyen
+            'quantity' => 'required|string',
+            'product_id' => 'required|string',
+            'agency_id' => 'required|string',
         ];
     }
 }

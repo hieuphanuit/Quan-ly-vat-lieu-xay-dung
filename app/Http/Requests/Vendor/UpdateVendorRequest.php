@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Agency;
+namespace App\Http\Requests\Vendor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAgencyRequest extends FormRequest
+class UpdateVendorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,8 @@ class UpdateAgencyRequest extends FormRequest
         return [
             'name' => 'string',
             'address' => 'string',
-<<<<<<< HEAD
-            'phone' => 'string',
-=======
             'phone' => 'min:10|string',
-
->>>>>>> Duc_Nguyen
+            'email' => 'min:5|string',
         ];
     }
 }

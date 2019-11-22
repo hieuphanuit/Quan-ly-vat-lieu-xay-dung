@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\AgencyService;
-use App\Http\Requests\Agency\CreateAgencyRequest;
-use App\Http\Requests\Agency\UpdateAgencyRequest;
+use App\Http\Services\VendorService;
+use App\Http\Requests\Vendor\CreateVendorRequest;
+use App\Http\Requests\Vendor\UpdateVendorRequest;
 
-class AgencyController extends Controller
+class VendorController extends Controller
 {
     //
     protected $service;
 
-    public function __construct(AgencyService $agencyService)
+    public function __construct(VendorService $vendorService)
     {
-        $this->service = $agencyService;    
+        $this->service = $vendorService;    
     }
     
     public function index(Request $request)
@@ -27,15 +27,16 @@ class AgencyController extends Controller
         return $this->service->detail($id);
     }
 
-    public function create(CreateAgencyRequest $request)
+    public function create(CreateVendorRequest $request)
     {
         return $this->service->create($request);
     }
 
-    public function update(UpdateAgencyRequest $request)
+    public function update(UpdateVendorRequest $request)
     {
         return $this->service->update($request);
     }
+
     public function delete($id)
     {
         return $this->service->delete($id);
