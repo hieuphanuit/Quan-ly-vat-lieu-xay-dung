@@ -25,6 +25,7 @@ Route::group(['middleware' => 'api'], function () {
         'middleware' => 'auth:api',
         'prefix' => 'auth'
     ],  function ($router) {
+        Route::post('/change-password', 'AuthController@logout');
         Route::post('/logout', 'AuthController@logout');
         Route::post('/refresh', 'AuthController@refresh');
         Route::post('/info', 'AuthController@info');
@@ -88,7 +89,7 @@ Route::group([
 
 Route::group([
    'middleware' => 'auth.role:0',
-    'prefix' => 'vendors'
+    'prefix' => 'vendor'
 ], function (){
     Route::post('/','VendorController@create');
     Route::delete('/{id}','VendorController@delete');
@@ -108,3 +109,14 @@ Route::group([
     Route::put('/{id}','AngencyProductController@update');
 });
 
+Route::group([
+    // 'middleware' => 'auth.role:0',
+     'prefix' =>  'user'
+ ],function(){
+     Route::post('/','UserController@create');
+     Route::delete('/{id}','UserController@delete');
+     Route::get('/','UserController@index');
+     Route::get('/{id}','UserController@detail');
+     Route::put('/{id}','UserController@update');
+ });
+ 

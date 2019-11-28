@@ -26,8 +26,8 @@ class UpdateVendorRequest extends FormRequest
         return [
             'name' => 'string',
             'address' => 'string',
-            'phone' => 'min:10|string',
-            'email' => 'min:5|string',
+            'phone' => 'string',
+            'email' => 'email',
         ];
     }
 }

@@ -3,18 +3,22 @@
 namespace App\Helpers\Statics;
 
 class UserRolesStatic {
-    const MANAGER = 0;
-    const AGENCY_MANAGER = 1;
-    const BUSINESS_STAFF = 2;
-    const WAREHOUSE_STAFF = 3;
+    const ADMIN = 0;
+    const MANAGER = 1;
+    const ASSISTANT = 2;
+    const AGENCY_MANAGER = 3;
+    const BUSINESS_STAFF = 4;
+    const WAREHOUSE_STAFF = 5;
 
     public static function getRoleChoices()
     {
         return [
-            self::MANAGER => 'Manager',
-            self::AGENCY_MANAGER => 'Agency manager',
-            self::BUSINESS_STAFF => 'Business staff',
-            self::WAREHOUSE_STAFF => 'Warehouse staff',
+            self::ADMIN => 'Admin',
+            self::MANAGER => 'Giám đốc',
+            self::ASSISTANT => 'Trợ lý',
+            self::AGENCY_MANAGER => 'Quản lý đại lý',
+            self::BUSINESS_STAFF => 'Nhân viên kinh doanh',
+            self::WAREHOUSE_STAFF => 'Nhân viên kho',
         ];
     }
 

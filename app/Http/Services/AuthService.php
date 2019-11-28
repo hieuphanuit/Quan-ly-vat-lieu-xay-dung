@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService {
 
@@ -27,7 +28,7 @@ class AuthService {
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['message' => 'Đăng xuất thành công']);
     }
 
     public function info()
@@ -35,6 +36,23 @@ class AuthService {
         return response()->json(auth()->user());
     }
     
+    public function changePassword($request)
+    {
+        $user = auth()->user();
+        $oldPass = $request->get('old_password');
+        if (auth()->attempt([
+            'email' => $user->email,
+            'password' => $oldPass
+        ])) {
+            $user->password = Hash::make($request->get('password'));
+            $user->save();
+            return response()->json(['message' => 'Đổi mật khẩu thành công']);
+        }
+
+        return response()->json([
+            'error' => 'Unauthorized'
+        ], 401); 
+    }
 
 
 
