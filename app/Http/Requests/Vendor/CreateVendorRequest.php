@@ -27,11 +27,7 @@ class CreateVendorRequest extends FormRequest
             'name' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|string',
-            'email' => 'required|string',
-            // 'categories' => 'required|array',
-            // 'categories.*' => 'required|integer|exists:categories,id',
-            // 'images' => 'array',
-            // 'images.*' => 'image'
+            'email' => 'required|email',
         ];
     }
 }
