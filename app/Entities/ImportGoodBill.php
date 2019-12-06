@@ -33,4 +33,9 @@ class ImportGoodBill extends Model
     {
         return $this->belongsTo(Vendor::class, 'vendor_id');
     }
+
+    public function ImportGoodBillDetail()
+    {
+        return $this->hasMany(ImportGoodBillDetail::class, 'import_goods_bill_id');
+    }
 }

@@ -77,11 +77,23 @@ Route::group([
 });
 
 Route::group([
+    'middleware' => 'auth.role:3',      //agency manager
+    'prefix' => 'import-goods-bill'
+],  function ($router) {
+    Route::post('', 'SellingBillController@create');
+    Route::delete('/{id}', 'SellingBillController@delete');
+    Route::put('/{id}', 'SellingBillController@update');
+    Route::get('/select-list','SelectBillController@selectList');
+
+});
+
+Route::group([
     'middleware' => 'auth.role:0',
     'prefix' => 'agency'
 ],  function ($router) {
     Route::get('/', 'AgencyController@index');
-    Route::get('/{id}', 'AgencyController@detail');
+    Route::get('/{id}', 'AgencyController@detail')->where(['id' => '[0-9]+']);;
+    Route::get('/get-list','AgencyController@getList');
     Route::post('/', 'AgencyController@create');
     Route::put('/{id}', 'AgencyController@update');
     Route::delete('/{id}', 'AgencyController@delete');

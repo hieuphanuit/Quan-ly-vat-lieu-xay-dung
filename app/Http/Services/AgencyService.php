@@ -52,6 +52,12 @@ class AgencyService {
         return response()
             ->json('Success');
     }
+
+    public function all()
+    {
+        return response()
+            ->json(['agencies' => Agency::all()]);
+    }
 }
 
 

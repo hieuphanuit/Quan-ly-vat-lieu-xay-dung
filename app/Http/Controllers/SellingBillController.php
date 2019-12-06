@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Product;
-use App\Http\Requests\Product\CreateProductRequest;
-use App\Http\Requests\SellingBill\CreateSellingBillRequest;
 use App\Http\Services\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Services\SellingBillService;
@@ -62,6 +60,11 @@ class SellingBillController extends Controller
         return response()->json($sellingBill);
     }
 
+    public function selectList()
+    {
+        $agency_id = auth()->user()->agency_id;
+        $result = $this->service->selectList($agency_id);
 
-
+        return response()->json(['selling_bill' =>$result]);
+    }
 }
