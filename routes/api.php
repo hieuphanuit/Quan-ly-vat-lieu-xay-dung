@@ -60,6 +60,7 @@ Route::group(['middleware' => 'api'], function () {
         'prefix' => 'customer'
     ],  function ($router) {
         Route::get('/', 'CustomerController@index');
+        Route::get('/select-list', 'CustomerController@selectList');
         Route::get('/{id}', 'CustomerController@detail');
         Route::post('', 'CustomerController@create');
         Route::put('/{id}', 'CustomerController@update');
@@ -106,6 +107,7 @@ Route::group([
     Route::post('/','VendorController@create');
     Route::delete('/{id}','VendorController@delete');
     Route::get('/','VendorController@index');
+    Route::get('/select-list','VendorController@selectList');
     Route::get('/{id}','VendorController@detail');
     Route::put('/{id}','VendorController@update');
 });

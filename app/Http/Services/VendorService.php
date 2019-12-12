@@ -53,6 +53,14 @@ class VendorService {
         return response()
             ->json('Success');
     }
+
+    public function getList()
+    {
+        $vendors = Vendor::all();
+        
+        return response()
+            ->json($vendors);
+    }
 }
 
 

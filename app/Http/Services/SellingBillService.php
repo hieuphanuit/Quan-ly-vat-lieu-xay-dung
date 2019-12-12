@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Services;
 
-use App\SellingBill;
+use App\Entities\SellingBill;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use App\Entities\Customer;
