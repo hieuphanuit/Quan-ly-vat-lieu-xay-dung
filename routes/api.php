@@ -69,12 +69,36 @@ Route::group(['middleware' => 'api'], function () {
 });
 
 Route::group([
-    'middleware' => 'auth.role:2',      //business staff
+    //'middleware' => 'auth.role:2',      //business staff
     'prefix' => 'selling-bill'
 ],  function ($router) {
+
+    Route::get('/', 'SellingBillController@index');
+
     Route::post('', 'SellingBillController@create');
     Route::delete('/{id}', 'SellingBillController@delete');
     Route::put('/{id}', 'SellingBillController@update');
+});
+Route::group([
+    //'middleware' => 'auth.role:2',      //business staff
+    'prefix' => 'selling-bill-detail'
+],  function ($router) {
+    Route::get('/', 'SellingBillDetailController@index');
+    Route::get('/{id}', 'SellingBillDetailController@detail');
+    Route::post('', 'SellingBillDetailController@create');
+    //Route::delete('/{id}', 'SellingBillDetailController@delete');
+   // Route::put('/{id}', 'SellingBillDetailController@update');
+});
+
+Route::group([
+    //'middleware' => 'auth.role:2',      //business staff
+    'prefix' => 'selling-transactions'
+],  function ($router) {
+    Route::get('/', 'SellingTransactionsController@index');
+    Route::post('', 'SellingTransactionsController@create');
+    Route::delete('/{id}', 'SellingTransactionsController@delete');
+    Route::put('/{id}', 'SellingTransactionsController@update');
+    Route::get('/{id}', 'SellingTransactionsController@detail');
 });
 
 Route::group([

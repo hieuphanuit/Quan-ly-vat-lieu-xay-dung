@@ -24,7 +24,10 @@ class SellingBillController extends Controller
         $this->productService = $productService;
         $this->sellingBilDetailService = $sellingBilDetailService;
     }
-
+    public function index(Request $request)
+    {
+        return $this->service->index($request); 
+    }
 
     public function create(Request $request)
     {
