@@ -2,13 +2,12 @@
 
 
 namespace App\Http\Services;
-use App\Entities\ImportGoodsBillDetail;
 
-class ImportGoodsBillDetailsService
+class ImportGoodBillDetailsService
 {
     public function create($request)
     {
-        return ImportGoodsBillDetail::create($request);
+        return ImportGoodBillDetail::create($request);
     }
 
 }
