@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class UpdateCustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'email' => 'email|required',
-            'password' => 'required',
+            'email' => 'string|email',
+            'phone'=> 'string|min:10',
+            'in_debt_amount'=> 'integer|min:0'
         ];
     }
 }

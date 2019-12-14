@@ -2,61 +2,64 @@
 
 namespace App\Http\Services;
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
-use App\Entities\Agency;
+use App\Entities\Customer;
 
-class AgencyService {
-
+class CustomerService
+{
     public function index($request)
     {
         $limit = $request->get('limit', 10);
 
-        $agency = Agency::paginate($limit);
+        $customer = Customer::paginate($limit);
 
         return response()
-            ->json($agency); 
+            ->json($customer); 
     }
 
     public function detail($id)
     {
-        $agency = Agency::find($id);
+        $customer = Customer::find($id);
 
         return response()
-            ->json($agency);
+            ->json($customer);
     }
 
     public function create($request)
     {
         $data = $request->all();
-        $agency = Agency::create($data);
+        $customer = Customer::create($data);
 
         return response()
-            ->json($agency);
+            ->json($customer);
     }
 
     public function update($request)
     {
         $data = $request->all();
-        $agency = Agency::find($request->id);
-        $agency->update($data);
+        $customer = Customer::find($request->id);
+        $customer->update($data);
 
         return response()
-            ->json($agency);
+            ->json($customer);
     }
 
     public function delete($id)
     {
-        $agency = Agency::find($id);
-        $agency->delete();
+        $customer = Customer::find($id);
+        $customer->delete();
 
         return response()
             ->json('Success');
     }
 
-    public function all()
+    public function selectList()
     {
+        $customer = Customer::all();
+
         return response()
-            ->json(['agencies' => Agency::all()]);
+            ->json($customer);
     }
 }
 

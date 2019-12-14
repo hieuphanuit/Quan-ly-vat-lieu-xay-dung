@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\SellingBill;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class CreateSellingBillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,10 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'email' => 'email|required',
-            'password' => 'required',
+            'total_amount' => 'integer|default:null|min:0',
+            'total_paid' => 'integer|min:0',
+            'customer_id'   => 'integer|require|min:0',
+            'status'    => 'integer|default:null'
         ];
     }
 }

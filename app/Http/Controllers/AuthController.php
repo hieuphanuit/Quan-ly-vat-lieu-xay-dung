@@ -32,4 +32,9 @@ class AuthController extends Controller
     {
         return $this->service->info();
     }
+
+    public function changePassword(Request $request)
+    {
+        return $this->service->changePassword($request);
+    }
 }

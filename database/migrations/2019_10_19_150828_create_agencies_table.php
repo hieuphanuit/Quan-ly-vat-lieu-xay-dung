@@ -18,7 +18,6 @@ class CreateAgenciesTable extends Migration
             $table->string('name', 64);
             $table->string('address');
             $table->string('phone', 16);
-            $table->unsignedInteger('manager_id');
             $table->timestamps();
         });
     }

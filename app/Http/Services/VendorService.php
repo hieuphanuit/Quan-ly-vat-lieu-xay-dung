@@ -2,61 +2,64 @@
 
 namespace App\Http\Services;
 
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
-use App\Entities\Agency;
+use App\Entities\Vendor;
 
-class AgencyService {
+class VendorService {
 
     public function index($request)
     {
         $limit = $request->get('limit', 10);
 
-        $agency = Agency::paginate($limit);
+        $vendor = Vendor::paginate($limit);
 
         return response()
-            ->json($agency); 
+            ->json($vendor); 
     }
 
     public function detail($id)
     {
-        $agency = Agency::find($id);
+        $vendor = Vendor::find($id);
 
         return response()
-            ->json($agency);
+            ->json($vendor);
     }
 
     public function create($request)
     {
         $data = $request->all();
-        $agency = Agency::create($data);
+        $vendor = Vendor::create($data);
 
         return response()
-            ->json($agency);
+            ->json($vendor);
     }
 
     public function update($request)
     {
         $data = $request->all();
-        $agency = Agency::find($request->id);
-        $agency->update($data);
+        $vendor = Vendor::find($request->id);
+        $vendor->update($data);
 
         return response()
-            ->json($agency);
+            ->json($vendor);
     }
 
     public function delete($id)
     {
-        $agency = Agency::find($id);
-        $agency->delete();
+        $vendor = Vendor::find($id);
+        $vendor->delete();
 
         return response()
             ->json('Success');
     }
 
-    public function all()
+    public function getList()
     {
+        $vendors = Vendor::all();
+        
         return response()
-            ->json(['agencies' => Agency::all()]);
+            ->json($vendors);
     }
 }
 

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\AgencyService;
-use App\Http\Requests\Agency\CreateAgencyRequest;
-use App\Http\Requests\Agency\UpdateAgencyRequest;
+use App\Http\Services\UserService;
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 
-class AgencyController extends Controller
+class UserController extends Controller
 {
     //
     protected $service;
 
-    public function __construct(AgencyService $agencyService)
+    public function __construct(UserService $agencyService)
     {
         $this->service = $agencyService;    
     }
@@ -22,23 +22,17 @@ class AgencyController extends Controller
         return $this->service->index($request); 
     }
 
-    public function getList()
-    {
-        return $this->service->all();
-    }
-
     public function detail($id)
     {
         return $this->service->detail($id);
     }
 
-    public function create(CreateAgencyRequest $request)
+    public function create(CreateUserRequest $request)
     {
-        $request['manager_id'] = auth()->user()->id;
         return $this->service->create($request);
     }
 
-    public function update(UpdateAgencyRequest $request)
+    public function update(UpdateUserRequest $request)
     {
         return $this->service->update($request);
     }
