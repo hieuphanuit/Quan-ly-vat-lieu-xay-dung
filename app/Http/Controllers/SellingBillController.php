@@ -7,6 +7,7 @@ use App\Http\Services\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Services\SellingBillService;
 use App\Http\Services\SellingBillDetailService;
+use App\Helpers\Statics\SellingBillStatus;
 
 class SellingBillController extends Controller
 {
@@ -54,16 +55,20 @@ class SellingBillController extends Controller
 
         $sellingBill->update([
            'total_amount' =>$totalAmount,
-           'status' => $status
+           'status_paid' => $status
         ]);
 
         return response()->json($sellingBill);
     }
 
-    public function selectList()
+    public function index(Request $request)
     {
         $agency_id = auth()->user()->agency_id;
-        $result = $this->service->selectList($agency_id);
+        $result = $this->service->selectList($agency_id, $request->get('limit'), auth()->user()->role);
+        
+        foreach($result as $key => $bill){
+            $result[$key]->status_confirm = SellingBillStatus::getStatusText($bill->status_confirm);
+        }
 
         return response()->json(['selling_bill' =>$result]);
     }

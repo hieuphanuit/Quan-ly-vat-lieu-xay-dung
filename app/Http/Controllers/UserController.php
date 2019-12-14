@@ -40,4 +40,8 @@ class UserController extends Controller
     {
         return $this->service->delete($id);
     }
+    public function getUserInfor()
+    {
+        return response()->json(auth()->user());
+    }
 }

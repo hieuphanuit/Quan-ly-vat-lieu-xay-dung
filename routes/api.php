@@ -56,7 +56,7 @@ Route::group(['middleware' => 'api'], function () {
     });
 
     Route::group([
-        'middleware' => 'auth.role:0',      //business staff
+        'middleware' => 'auth.role:4',      //business staff
         'prefix' => 'customer'
     ],  function ($router) {
         Route::get('/', 'CustomerController@index');
@@ -69,22 +69,23 @@ Route::group(['middleware' => 'api'], function () {
 });
 
 Route::group([
-    'middleware' => 'auth.role:2',      //business staff
+    'middleware' => 'auth.role:4',      //business staff
     'prefix' => 'selling-bill'
 ],  function ($router) {
     Route::post('', 'SellingBillController@create');
+    Route::get('/', 'SellingBillController@index');
     Route::delete('/{id}', 'SellingBillController@delete');
     Route::put('/{id}', 'SellingBillController@update');
 });
 
 Route::group([
-    'middleware' => 'auth.role:3',      //agency manager
+    'middleware' => 'auth.role:2',      //agency manager
     'prefix' => 'import-goods-bill'
 ],  function ($router) {
-    Route::post('', 'SellingBillController@create');
-    Route::delete('/{id}', 'SellingBillController@delete');
-    Route::put('/{id}', 'SellingBillController@update');
-    Route::get('/select-list','SelectBillController@selectList');
+    Route::post('', 'ImportGoodsBillController@create');
+    // Route::delete('/{id}', 'SellingBillController@delete');
+    // Route::put('/{id}', 'SellingBillController@update');
+    // Route::get('/select-list','SelectBillController@selectList');
 
 });
 
@@ -93,7 +94,7 @@ Route::group([
     'prefix' => 'agency'
 ],  function ($router) {
     Route::get('/', 'AgencyController@index');
-    Route::get('/{id}', 'AgencyController@detail')->where(['id' => '[0-9]+']);;
+    Route::get('/{id}', 'AgencyController@detail')->where(['id' => '[0-9]+']);
     Route::get('/get-list','AgencyController@getList');
     Route::post('/', 'AgencyController@create');
     Route::put('/{id}', 'AgencyController@update');
@@ -113,7 +114,7 @@ Route::group([
 });
 
 Route::group([
-   // 'middleware' => 'auth.role:0',
+   'middleware' => 'auth.role:0',
     'prefix' =>  'angency-product'
 ],function(){
     Route::post('/','AngencyProductController@create');
@@ -124,13 +125,42 @@ Route::group([
 });
 
 Route::group([
-    // 'middleware' => 'auth.role:0',
+    'middleware' => 'auth.role:0',
      'prefix' =>  'user'
  ],function(){
      Route::post('/','UserController@create');
      Route::delete('/{id}','UserController@delete');
      Route::get('/','UserController@index');
-     Route::get('/{id}','UserController@detail');
+     Route::get('/{id}','UserController@detail')->where(['id' => '[0-9]+']);;
      Route::put('/{id}','UserController@update');
  });
  
+
+
+//test enviroment
+Route::group([
+   // 'middleware' => 'auth.role:0',      //business staff
+    'prefix' => 'selling-bill'
+],  function ($router) {
+    Route::post('', 'SellingBillController@create');
+    Route::get('/', 'SellingBillController@index');
+    Route::delete('/{id}', 'SellingBillController@delete');
+    Route::put('/{id}', 'SellingBillController@update');
+});
+
+
+Route::group([
+    //'middleware' => 'auth.role:0',
+    'prefix' =>  'user'
+ ],function(){
+    //  Route::post('/','UserController@create');
+    //  Route::delete('/{id}','UserController@delete');
+    //  //Route::get('/','UserController@index');
+     Route::get('/infor','UserController@getUserInfor');
+    //  Route::get('/{id}','UserController@detail');
+    //  Route::put('/{id}','UserController@update');
+ });
+
+
+
+
