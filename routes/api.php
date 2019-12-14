@@ -60,6 +60,7 @@ Route::group(['middleware' => 'api'], function () {
         'prefix' => 'customer'
     ],  function ($router) {
         Route::get('/', 'CustomerController@index');
+        Route::get('/select-list', 'CustomerController@selectList');
         Route::get('/{id}', 'CustomerController@detail');
         Route::post('', 'CustomerController@create');
         Route::put('/{id}', 'CustomerController@update');
@@ -68,12 +69,47 @@ Route::group(['middleware' => 'api'], function () {
 });
 
 Route::group([
-    'middleware' => 'auth.role:2',      //business staff
+    //'middleware' => 'auth.role:2',      //business staff
     'prefix' => 'selling-bill'
+],  function ($router) {
+
+    Route::get('/', 'SellingBillController@index');
+
+    Route::post('', 'SellingBillController@create');
+    Route::delete('/{id}', 'SellingBillController@delete');
+    Route::put('/{id}', 'SellingBillController@update');
+});
+Route::group([
+    //'middleware' => 'auth.role:2',      //business staff
+    'prefix' => 'selling-bill-detail'
+],  function ($router) {
+    Route::get('/', 'SellingBillDetailController@index');
+    Route::get('/{id}', 'SellingBillDetailController@detail');
+    Route::post('', 'SellingBillDetailController@create');
+    //Route::delete('/{id}', 'SellingBillDetailController@delete');
+   // Route::put('/{id}', 'SellingBillDetailController@update');
+});
+
+Route::group([
+    //'middleware' => 'auth.role:2',      //business staff
+    'prefix' => 'selling-transactions'
+],  function ($router) {
+    Route::get('/', 'SellingTransactionsController@index');
+    Route::post('', 'SellingTransactionsController@create');
+    Route::delete('/{id}', 'SellingTransactionsController@delete');
+    Route::put('/{id}', 'SellingTransactionsController@update');
+    Route::get('/{id}', 'SellingTransactionsController@detail');
+});
+
+Route::group([
+    'middleware' => 'auth.role:3',      //agency manager
+    'prefix' => 'import-goods-bill'
 ],  function ($router) {
     Route::post('', 'SellingBillController@create');
     Route::delete('/{id}', 'SellingBillController@delete');
     Route::put('/{id}', 'SellingBillController@update');
+    Route::get('/select-list','SelectBillController@selectList');
+
 });
 
 Route::group([
@@ -81,7 +117,8 @@ Route::group([
     'prefix' => 'agency'
 ],  function ($router) {
     Route::get('/', 'AgencyController@index');
-    Route::get('/{id}', 'AgencyController@detail');
+    Route::get('/{id}', 'AgencyController@detail')->where(['id' => '[0-9]+']);;
+    Route::get('/get-list','AgencyController@getList');
     Route::post('/', 'AgencyController@create');
     Route::put('/{id}', 'AgencyController@update');
     Route::delete('/{id}', 'AgencyController@delete');
@@ -94,6 +131,7 @@ Route::group([
     Route::post('/','VendorController@create');
     Route::delete('/{id}','VendorController@delete');
     Route::get('/','VendorController@index');
+    Route::get('/select-list','VendorController@selectList');
     Route::get('/{id}','VendorController@detail');
     Route::put('/{id}','VendorController@update');
 });

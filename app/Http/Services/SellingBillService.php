@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Services;
 
-use App\SellingBill;
+use App\Entities\SellingBill;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
-
+use App\Entities\Customer;
 
 class SellingBillService
 {
@@ -50,7 +50,13 @@ class SellingBillService
             ->json('Success');
     }
 
+    public function selectList($agencyID)
+    {
+        $sellingBill = SellingBill::select('total_amount', 'total_paid', 'status', 'c.name')
+                        ->join('customers as c', 'customer_id', '=', 'c.id')
+                        ->where('agency_id', $agencyID)
+                        ->get();
 
+        return $sellingBill;
+    }
 }
-
-?>

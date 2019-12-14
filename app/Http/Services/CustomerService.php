@@ -53,6 +53,14 @@ class CustomerService
         return response()
             ->json('Success');
     }
+
+    public function selectList()
+    {
+        $customer = Customer::all();
+
+        return response()
+            ->json($customer);
+    }
 }
 
 

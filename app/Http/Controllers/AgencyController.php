@@ -22,6 +22,11 @@ class AgencyController extends Controller
         return $this->service->index($request); 
     }
 
+    public function getList()
+    {
+        return $this->service->all();
+    }
+
     public function detail($id)
     {
         return $this->service->detail($id);
@@ -29,6 +34,7 @@ class AgencyController extends Controller
 
     public function create(CreateAgencyRequest $request)
     {
+        $request['manager_id'] = auth()->user()->id;
         return $this->service->create($request);
     }
 
