@@ -32,4 +32,9 @@ class SellingBillDetailService
     {
         SellingBillDetail::create($data);
     }
+
+    public function sellingBillDetail($selling_bil_id)
+    {
+        //$result = SellingBillDetail::select('')
+    }
 }
