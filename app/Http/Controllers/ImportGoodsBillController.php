@@ -30,8 +30,8 @@ class ImportGoodsBillController extends Controller
         $totalAmount = 0;
 
         $importGoodBill = $this->importGoodsBillService->create([
-            'created_by' =>1  ,  //$user->id
-            'agency_id' => 1, //$user->agency_id
+            'created_by' =>$user->id  ,  //$user->id
+            'agency_id' => $user->agency_id, //$user->agency_id
             'total_paid' => $data['total_paid'],
             'vendor_id' => $data['vendor_id'],
         ]);

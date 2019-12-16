@@ -17,7 +17,8 @@ class SellingBill extends Model
         'total_amount',
         'total_paid',
         'customer_id',
-        'status'
+        'status_paid',
+        'status_confirm'
     ];
 
     public function SellingBillDetail()

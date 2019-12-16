@@ -25,10 +25,6 @@ class SellingBillController extends Controller
         $this->productService = $productService;
         $this->sellingBilDetailService = $sellingBilDetailService;
     }
-    public function index(Request $request)
-    {
-        return $this->service->index($request); 
-    }
 
     public function create(Request $request)
     {
@@ -54,7 +50,7 @@ class SellingBillController extends Controller
         $sellingBill->sellingBillDetail()->createMany($data['details']);
 
         $sellingBill->total_amount = $totalAmount;
-        $sellingBill->status = $status;
+        $sellingBill->status_paid = $status;
 
         $sellingBill->update([
            'total_amount' =>$totalAmount,
@@ -74,5 +70,10 @@ class SellingBillController extends Controller
         }
 
         return response()->json(['selling_bill' =>$result]);
+    }
+
+    public function updateStatus($id)
+    {
+        return $this->service->updateStatus($id);
     }
 }

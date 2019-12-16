@@ -5,36 +5,15 @@ namespace App\Http\Services;
 use App\SellingBillDetail;
 
 class SellingBillDetailService
-{
-    public function index($request)
+{    
+   public function sellingBillDetail($selling_bill_id)
     {
-        // $sell_bill_id = $request->get('sell_bill_id');
+        $result = SellingBillDetail::select('*', 'c.name as customer_name', 'p.name')
+                    ->leftJoin('selling_bills as b', 'selling_bill_details.selling_bill_id', '=', 'b.id')
+                    ->leftJoin('customers as c', 'c.id', 'b.customer_id')
+                    ->leftJoin('products as p', 'p.id', '=', 'selling_bill_details.product_id')
+                    ->where('selling_bill_details.selling_bill_id', '=', $selling_bill_id);
 
-        $limit = $request->get('limit', 10);
-
-        $SellingBillDetail = SellingBillDetail::paginate($limit);
-
-        return response()
-            ->json($SellingBillDetail);
-       
-    }
-
-    public function detail($id)
-    {
-       $selling_bill_id = ['selling_bill_id' => $id];
-        $SellingBillDetail = SellingBillDetail::where($selling_bill_id)->get();
-        return response()
-            ->json($SellingBillDetail);
-    }
-
-
-    public function create($data)
-    {
-        SellingBillDetail::create($data);
-    }
-
-    public function sellingBillDetail($selling_bil_id)
-    {
-        //$result = SellingBillDetail::select('')
+        return $result->get();
     }
 }
