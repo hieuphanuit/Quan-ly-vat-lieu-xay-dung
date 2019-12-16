@@ -65,4 +65,10 @@ class SellingBillService
 
         return $sellingBill->paginate($limit);
     }
+
+    public function updateStatus($id)
+    {
+        $sellingBill = SellingBill::find($id);
+        return response()->json($sellingBill->update(['status_confirm' => 1]));
+    }
 }
