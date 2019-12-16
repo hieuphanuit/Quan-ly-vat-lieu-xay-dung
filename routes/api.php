@@ -100,14 +100,14 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:0',      //agency manager
+    //'middleware' => 'auth.role:2',      //agency manager
     'prefix' => 'import-goods-bill'
 ],  function ($router) {
     Route::post('', 'ImportGoodsBillController@create');
-    // Route::delete('/{id}', 'SellingBillController@delete');
-    // Route::put('/{id}', 'SellingBillController@update');
-    // Route::get('/select-list','SelectBillController@selectList');
-
+    //Route::delete('/{id}', 'SellingBillController@delete');
+    Route::put('/list/{id}', 'ImportGoodsBillController@update');
+    Route::get('/list/{id}','ImportGoodsBillController@detail');
+     Route::get('/list','ImportGoodsBillController@selectList');
 });
 
 Route::group([

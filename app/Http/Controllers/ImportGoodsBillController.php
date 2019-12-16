@@ -26,7 +26,7 @@ class ImportGoodsBillController extends Controller
     {
         $user = auth()->user();
         $data = $request->all();
-      //  dd($data);
+       //dd($data);
         $totalAmount = 0;
 
         $importGoodBill = $this->importGoodsBillService->create([
@@ -37,6 +37,7 @@ class ImportGoodsBillController extends Controller
         ]);
 
         foreach($data['details'] as &$detail){
+           // dd($detail);
             $price = Product::find($detail['product_id'])['import_price'];
             //$price = $detail['import_unit_price'];
             $detail['unit_price'] = $price;
@@ -57,7 +58,16 @@ class ImportGoodsBillController extends Controller
         return response()->json($importGoodBill);
     }
     public function selectList(Request $request){
+       $user = auth()->user();
+      //  dd($user->role);
+        return $this->importGoodsBillService->selectList($request, $user->role); 
+    }
+    public function detail($id){
+           $user = auth()->user();
+        return $this->importGoodsBillService->detail($id,$user->role);
+    }
+    public function update($id){
         $user = auth()->user();
-        return $this->importGoodsBillService->selectList($request,$user->role); 
+        return $this->importGoodsBillService->update($id,$user->role);
     }
 }
