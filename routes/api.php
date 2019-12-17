@@ -56,7 +56,7 @@ Route::group(['middleware' => 'api'], function () {
     });
 
     Route::group([
-        'middleware' => 'auth.role:4',      //business staff
+        //'middleware' => 'auth.role:4',      //business staff
         'prefix' => 'customer'
     ],  function ($router) {
         Route::get('/', 'CustomerController@index');
@@ -69,7 +69,7 @@ Route::group(['middleware' => 'api'], function () {
 });
 
 Route::group([
-    'middleware' => 'auth.role:4',      //business staff
+   // 'middleware' => 'auth.role:4',      //business staff
     'prefix' => 'selling-bill'
 ],  function ($router) {    
     Route::get('/', 'SellingBillController@index');

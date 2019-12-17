@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Product;
+use App\Entities\SellingBill;
 use App\Http\Services\ProductService;
 use Illuminate\Http\Request;
 use App\Http\Services\SellingBillService;
@@ -21,11 +22,11 @@ class SellingBillDetailController extends Controller
     }
     public function index($selling_bill_id)
     {
-        $sellingBillDetails = $this->service->sellingBillDetail($selling_bill_id);
-        foreach($sellingBillDetails as $key => $bill){
-            $sellingBillDetails[$key]->status_confirm_text = SellingBillStatus::getStatusText($bill->status_confirm); 
-        }
-
-        return response()->json($sellingBillDetails); 
+        $data = SellingBill::with([
+            'sellingBillDetail.product',
+            'customer'
+            ])->find($selling_bill_id);
+        $data->status_confirm_text = SellingBillStatus::getStatusText($data->status_confirm); 
+        return response()->json($data); 
     }
 }
