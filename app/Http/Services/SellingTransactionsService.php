@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Services;
 
+use App\Entities\SellingBill;
 use App\Entities\SellingTransaction;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
@@ -8,6 +9,8 @@ use Illuminate\Support\Facades\Response;
 
 class SellingTransactionsService
 {
+
+
     public function index($request)
     {
         $limit = $request->get('limit', 10);
@@ -54,7 +57,6 @@ class SellingTransactionsService
         return response()
             ->json('Success');
     }
-
 
 }
 

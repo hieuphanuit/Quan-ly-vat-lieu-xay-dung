@@ -3,11 +3,11 @@
 
 namespace App\Http\Services;
 
-class ImportGoodBillDetailsService
+class ImportGoodsBillDetailsService
 {
     public function create($request)
     {
-        return ImportGoodBillDetail::create($request);
+        //return ImportGoodBillDetail::create($request);
     }
 
 }

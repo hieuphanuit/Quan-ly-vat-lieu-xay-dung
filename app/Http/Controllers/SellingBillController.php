@@ -31,7 +31,6 @@ class SellingBillController extends Controller
         $user = auth()->user();
         $data = $request->all();
         $totalAmount = 0;
-
         $sellingBill = $this->service->create([
             'created_by' => $user->id,
             'agency_id' => $user->agency_id,
@@ -48,15 +47,14 @@ class SellingBillController extends Controller
 
         $status = ($data['total_paid'] == $totalAmount) ? 0 : 1;
         $sellingBill->sellingBillDetail()->createMany($data['details']);
-
         $sellingBill->total_amount = $totalAmount;
         $sellingBill->status_paid = $status;
-
         $sellingBill->update([
            'total_amount' =>$totalAmount,
            'status_paid' => $status
         ]);
 
+        $sellingBill->sellingTransaction()->create(['amount' => $data['total_paid']]);
         return response()->json($sellingBill);
     }
 
@@ -64,7 +62,7 @@ class SellingBillController extends Controller
     {
         $agency_id = auth()->user()->agency_id;
         $result = $this->service->selectList($agency_id, $request->get('limit'), auth()->user()->role);
-        
+
         foreach($result as $key => $bill){
             $result[$key]->status_confirm = SellingBillStatus::getStatusText($bill->status_confirm);
         }

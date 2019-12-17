@@ -15,7 +15,7 @@ class ImportGoodsBillService
         $limit = $request->get('limit', 10);
         $ImportGoodBill = ImportGoodBill::
         select('import_good_bills.id', 'vendors.name', 'import_good_bills.status', 'import_good_bills.total_paid', 'import_good_bills.created_at')
-        ->join('users', function($q) 
+        ->join('users', function($q)
         {
            $q->on('import_good_bills.created_by', 'users.id')
                ->join('agencies', 'users.agency_id', '=', 'agencies.id');
@@ -36,13 +36,13 @@ class ImportGoodsBillService
         }
         $ImportGoodBillSQL = $ImportGoodBill->paginate($limit);
 
-        return  $ImportGoodBillSQL; 
+        return  $ImportGoodBillSQL;
     }
     public function detail($id,$role){
-        $ImportGoodBill = ImportGoodBill::  
-        select('vendors.name as vendor_name','vendors.email as vendor_email', 
+        $ImportGoodBill = ImportGoodBill::
+        select('vendors.name as vendor_name','vendors.email as vendor_email',
         'products.name as product_name', 'products.unit as product_unit',
-        'import_goods_bill_details.quantity as IGD_quantity', 'import_goods_bill_details.unit_price as IGD_unit_price',
+        'import_goods_bill_details.quantity as IGD_quantity', 'products.price as IGD_unit_price',
         'import_good_bills.total_amount as IG_total_amount', 'import_good_bills.total_paid as IG_total_paid'
         )
 
@@ -67,25 +67,24 @@ class ImportGoodsBillService
                 ->orWhere('status', 2);
             break;
         }
-     
+
        $ImportGoodBillSQL = $ImportGoodBill->get();
        // dd( $ImportGoodBill->toSql());
         return response()
             ->json($ImportGoodBillSQL);
 
     }
-    public function update($id,$role){
+    public function updateStatus($id,$role){
         //dd($id);
         $ImportGoodBill = ImportGoodBill::where('import_good_bills.id', $id);
     ///
- 
+
     // dd($ImportGoodBill->toSql());
     switch($role){
-            case 2:   
+            case 2:
                 $ImportGoodBill->update(['import_good_bills.status' => 1]);
             break;
             case 5:
-                
                 $ImportGoodBill->update(['import_good_bills.status' => 2]);
             break;
         }
