@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +16,8 @@ class SellingBillDetail extends Model
         'unit_price',
         'quantity'
     ];
+
+    public function product() {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

@@ -56,8 +56,9 @@ class SellingBillService
         $sellingBill = SellingBill::select('selling_bills.id', 'total_amount', 'total_paid', 'c.name', 
                                     'selling_bills.created_at', 'status_paid', 'status_confirm')
                         ->leftJoin('customers as c', 'customer_id', '=', 'c.id')
-                        ->orderBy('selling_bills.id', 'desc')
-                        ->where('agency_id', $agencyID);
+                        //->orderBy('selling_bills.id', 'desc')
+                        ->where('agency_id', $agencyID)
+                        ->orderBy('status_confirm');
 
         if($userRole ==  UserRolesStatic::WAREHOUSE_STAFF){
             $sellingBill->where('status_confirm', '=', 0);

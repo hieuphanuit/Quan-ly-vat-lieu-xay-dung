@@ -43,7 +43,7 @@ class UserService {
     {
         $currentUser = auth()->user(); 
         $data = $request->all();
-        //$data['password'] = Hash::make($data['password']);
+        $data['password'] = Hash::make($data['password']);
         
         if($currentUser->role == UserRolesStatic::AGENCY_MANAGER){
             $data['agency_id'] = $currentUser->agency_id; 
@@ -57,8 +57,7 @@ class UserService {
         
         $user = User::create($data);
 
-        return response()
-            ->json($user);
+        return $user;
     }
 
     public function update($request)
