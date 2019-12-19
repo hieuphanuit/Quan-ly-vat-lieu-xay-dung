@@ -21,8 +21,12 @@ class RoleAuthenticate
     public function handle($request, Closure $next, ... $roles)
     {
         $user = auth()->user();
+
+        if($user->role == UserRolesStatic::ADMIN){
+            return $next($request);
+        }
+
         if (!$user || !in_array($user->role, $roles)) {
-           //return response()->json(['user' => $user]);
             return response()->json(
                 trans('message.forbidden') ,
                 403

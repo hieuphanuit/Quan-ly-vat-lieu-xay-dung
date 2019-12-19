@@ -169,7 +169,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:0',      //business staff
+    'middleware' => 'auth.role:0,4',      //business staff
     'prefix' => 'selling-bill-detail'
 ],  function ($router) {
     Route::get('/{id}', 'SellingBillDetailController@index');
@@ -190,5 +190,14 @@ Route::group([
  });
 
 
+//statistic
 
-
+Route::group([
+    'middleware' => 'auth.role:0,1,2,3',
+    'prefix' =>  'statistic'
+],function(){
+    Route::get('/overview','StatisticController@overviewStatistic');
+    Route::get('/total-selling-bill-trend','StatisticController@sellingBillTrend');
+    Route::get('/paid-selling-bill-trend','StatisticController@sellingBillPaidTrend');
+    Route::get('/spend-import-bill-trend','StatisticController@importBillSpendTrend');
+});

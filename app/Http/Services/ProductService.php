@@ -2,10 +2,14 @@
 
 namespace App\Http\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use App\Entities\Product;
 use App\Helpers\Traits\UploadImageTrait;
+use App\Helpers\Statics\UserRolesStatic;
+
+
 
 class ProductService {
     use UploadImageTrait;
@@ -40,6 +44,20 @@ class ProductService {
 
         if ($keyword) {
             $productQuery->where('name', 'like', "%{$keyword}%");
+        }
+
+        $user = auth()->user();
+        
+        if(
+            $user->role != UserRolesStatic::ADMIN 
+            || $user->role != UserRolesStatic::ASSISTANT 
+            || $user->role != UserRolesStatic::MANAGER
+        ) {
+            $productQuery->with([
+                'agencyProduct' => function($q) use ($user) {
+                    $q->where('agency_id', $user->agency_id);
+                }
+            ]);
         }
 
         $product = $productQuery->paginate($limit);
