@@ -29,14 +29,10 @@ class SellingTransactionsService
             ->json($SellingTransaction);
     }
 
-    public function create($request)
+    public function create($data)
     {
-       //return SellingTransaction::create($request);
-       $data = $request->all();
-       $SellingTransaction = SellingTransaction::create($data);
-      // SellingTransaction
-       return response()
-           ->json($SellingTransaction);
+        $SellingTransaction = SellingTransaction::create($data);
+        return $SellingTransaction;
     }
 
     public function update($request)
@@ -56,6 +52,11 @@ class SellingTransactionsService
 
         return response()
             ->json('Success');
+    }
+
+    public function getList(int $sellingBillId, $keyword = null)
+    {
+        return SellingTransaction::where('selling_bill_id', $sellingBillId)->get();
     }
 
 }

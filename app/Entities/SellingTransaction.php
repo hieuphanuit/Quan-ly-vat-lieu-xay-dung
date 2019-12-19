@@ -14,7 +14,7 @@ class SellingTransaction extends Model
         'amount'
     ];
 
-    public function SellingBill()
+    public function sellingBills()
     {
         return $this->belongsTo(SellingBill::class, 'selling_bill_id');
     }

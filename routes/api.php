@@ -89,14 +89,14 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:4',      //business staff
+   // 'middleware' => 'auth.role:4',      //business staff
     'prefix' => 'selling-transactions'
 ],  function ($router) {
-    Route::get('/', 'SellingTransactionsController@index');
+    Route::get('/', 'SellingTransactionsController@getList');
     Route::post('/', 'SellingTransactionsController@create');
-    Route::delete('/{id}', 'SellingTransactionsController@delete');
-    Route::put('/{id}', 'SellingTransactionsController@update');
-    Route::get('/{id}', 'SellingTransactionsController@detail');
+//    Route::delete('/{id}', 'SellingTransactionsController@delete');
+//    Route::put('/{id}', 'SellingTransactionsController@update');
+//    Route::get('/{id}', 'SellingTransactionsController@detail');
 });
 
 Route::group([
