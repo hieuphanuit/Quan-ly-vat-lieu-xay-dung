@@ -29,4 +29,10 @@ class SellingBill extends Model
     {
         return $this->belongsTo(Customer::class, 'customer_id');
     }
+
+    public function sellingTransaction()
+    {
+        return $this->hasMany(SellingTransaction::class, 'selling_bill_id');
+    }
+
 }

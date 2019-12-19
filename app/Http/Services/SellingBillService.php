@@ -53,7 +53,7 @@ class SellingBillService
 
     public function selectList($agencyID, $limit = 10, $userRole =  UserRolesStatic::ASSISTANT)
     {
-        $sellingBill = SellingBill::select('selling_bills.id', 'total_amount', 'total_paid', 'c.name', 
+        $sellingBill = SellingBill::select('selling_bills.id', 'total_amount', 'total_paid', 'c.name',
                                     'selling_bills.created_at', 'status_paid', 'status_confirm')
                         ->leftJoin('customers as c', 'customer_id', '=', 'c.id')
                         //->orderBy('selling_bills.id', 'desc')
@@ -65,6 +65,11 @@ class SellingBillService
         }
 
         return $sellingBill->paginate($limit);
+    }
+
+    public function model()
+    {
+        return SellingBill::class;
     }
 
     public function updateStatus($id)

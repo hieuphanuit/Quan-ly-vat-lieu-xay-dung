@@ -54,7 +54,7 @@ class ImportGoodsBillController extends Controller
      //   $status = ($data['total_paid'] == $totalAmount) ? 0 : 1;
         $importGoodBill->importGoodsBillDetail()->createMany($data['details']);
         $importGoodBill->total_amount = $totalAmount;
-        //$importGoodBill->status = $status;  
+        //$importGoodBill->status = $status;
 
         $importGoodBill->update([
             'total_amount' =>$totalAmount,
@@ -74,19 +74,18 @@ class ImportGoodsBillController extends Controller
             $result[$key]->status = ImportGoodBillStatus::getStatusText($bill->status);
         }
 
-        return response()->json(['selling_bill' =>$result]);
+        return response()->json(['import_goods_bill' =>$result]);
     }
     public function detail($id){
            $user = auth()->user();
         return $this->importGoodsBillService->detail($id,2);
     }
-    public function update($id){
+    public function updateStatus($id){
       // $user = auth()->user();
       $agency_id = ImportGoodBill::find($id)['agency_id'];
       $product_id = ImportGoodsBillDetail::select('product_id')->where('import_goods_bill_id', $id);
-     
-      dd($product_id);
+
         // $angencyproduc = $this->angencyproductService->
-        return $this->importGoodsBillService->update($id,2);
+      return $this->importGoodsBillService->updateStatus($id,2);
     }
 }
