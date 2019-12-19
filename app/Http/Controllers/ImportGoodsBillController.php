@@ -78,14 +78,16 @@ class ImportGoodsBillController extends Controller
     }
     public function detail($id){
            $user = auth()->user();
+
+        return response()->json($this->importGoodsBillService->detail($id,2));
         return $this->importGoodsBillService->detail($id,2);
     }
     public function updateStatus($id){
-      // $user = auth()->user();
+      $user = auth()->user();
       $agency_id = ImportGoodBill::find($id)['agency_id'];
       $product_id = ImportGoodsBillDetail::select('product_id')->where('import_goods_bill_id', $id);
 
         // $angencyproduc = $this->angencyproductService->
-      return $this->importGoodsBillService->updateStatus($id,2);
+      return $this->importGoodsBillService->updateStatus($id,$user->role);
     }
 }
