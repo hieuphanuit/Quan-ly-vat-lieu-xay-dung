@@ -14,8 +14,22 @@ class SellingBillService
     public function index($request)
     {
         $limit = $request->get('limit', 10);
+        
+        $currentUser = auth()->user(); 
+        $query = SellingBill::query();
+        
+        if(!in_array($currentUser->role, [
+            UserRolesStatic::ADMIN,
+            UserRolesStatic::MANAGER,
+            UserRolesStatic::ASSISTANT,
 
-        $SellingBill = SellingBill::paginate($limit);
+        ]) ){
+            $query->where('agency_id', $currentUser->agency_id);
+        }
+
+        $SellingBill =  $query
+            ->orderBy('id', 'desc')
+            ->paginate($limit);
 
         return response()
             ->json($SellingBill);
@@ -53,20 +67,28 @@ class SellingBillService
             ->json('Success');
     }
 
-    public function selectList($agencyID, $limit = 10, $userRole =  UserRolesStatic::ASSISTANT)
+    public function selectList($limit = 10)
     {
-        $sellingBill = SellingBill::select('selling_bills.id', 'total_amount', 'total_paid', 'c.name',
-                                    'selling_bills.created_at', 'status_paid', 'status_confirm')
-                        ->leftJoin('customers as c', 'customer_id', '=', 'c.id')
-                        //->orderBy('selling_bills.id', 'desc')
-                        ->where('agency_id', $agencyID)
-                        ->orderBy('status_confirm');
+        $currentUser = auth()->user();
 
-        if($userRole ==  UserRolesStatic::WAREHOUSE_STAFF){
-            $sellingBill->where('status_confirm', '=', 0);
+        $query = SellingBill::with('customer:id,name')
+                ->orderBy('status_confirm', 'asc')
+                ->orderBy('id', 'desc');
+
+        if(!in_array($currentUser->role, [
+            UserRolesStatic::ADMIN,
+            UserRolesStatic::MANAGER,
+            UserRolesStatic::ASSISTANT,
+
+        ]) ){
+            $query->where('agency_id', $currentUser->agency_id);
         }
 
-        return $sellingBill->paginate($limit);
+        if($currentUser->role == UserRolesStatic::BUSINESS_STAFF) {
+            $query->where('status_confirm', 0);
+        }
+      
+        return $query->paginate($limit);
     }
 
     public function model()

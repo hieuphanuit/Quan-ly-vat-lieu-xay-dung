@@ -45,7 +45,7 @@ Route::group(['middleware' => 'api'], function () {
     });
 
     Route::group([
-        'middleware' => 'auth.role:0',
+      //  'middleware' => 'auth.role:0',
         'prefix' => 'product'
     ],  function ($router) {
         Route::get('/', 'ProductController@index');
@@ -69,16 +69,7 @@ Route::group(['middleware' => 'api'], function () {
 });
 
 Route::group([
-   // 'middleware' => 'auth.role:4',      //business staff
-    'prefix' => 'selling-bill'
-],  function ($router) {
-    Route::get('/', 'SellingBillController@index');
-    Route::post('', 'SellingBillController@create');
-    Route::delete('/{id}', 'SellingBillController@delete');
-    Route::put('/{id}', 'SellingBillController@update');
-});
-Route::group([
-    'middleware' => 'auth.role:2',      //business staff
+    'middleware' => 'auth.role:4',      //business staff
     'prefix' => 'selling-bill-detail'
 ],  function ($router) {
     Route::get('/', 'SellingBillDetailController@index');
@@ -107,7 +98,7 @@ Route::group([
     //Route::delete('/{id}', 'SellingBillController@delete');
     Route::post('/{id}', 'ImportGoodsBillController@updateStatus');
     Route::get('/{id}','ImportGoodsBillController@detail')->where(['id' => '[0-9]+']);
-    Route::get('/list','ImportGoodsBillController@selectList');
+    Route::get('/list','ImportGoodsBillController@index');
 });
 
 Route::group([
@@ -158,7 +149,7 @@ Route::group([
 
 //test enviroment
 Route::group([
-    'middleware' => 'auth.role:0',      //business staff
+    //'middleware' => 'auth.role:0,4,5,',      //business staff
     'prefix' => 'selling-bill'
 ],  function ($router) {
     Route::get('/', 'SellingBillController@index');
@@ -176,7 +167,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:0',      //business staff
+    'middleware' => 'auth.role:0,5',      //business staff
     'prefix' => 'selling-transaction'
 ],  function ($router) {
     Route::post('', 'SellingTransactionsController@create');

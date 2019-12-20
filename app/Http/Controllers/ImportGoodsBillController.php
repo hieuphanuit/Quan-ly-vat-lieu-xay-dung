@@ -64,20 +64,18 @@ class ImportGoodsBillController extends Controller
         return response()->json($importGoodBill);
     }
 
-    public function selectList(Request $request){
-       $user = auth()->user();
-      //  dd($user->role);
-        $result =  $this->importGoodsBillService->selectList($request, 2);
-      //  return $result['data'];
+    public function index(Request $request){
+        $result =  $this->importGoodsBillService->selectList($request->get('limit'));
         foreach($result as $key => $bill){
-           // return $bill;
             $result[$key]->status = ImportGoodBillStatus::getStatusText($bill->status);
         }
 
-        return response()->json(['import_goods_bill' =>$result]);
+        return response()->json($result);
     }
     public function detail($id){
            $user = auth()->user();
+
+        return response()->json($this->importGoodsBillService->detail($id,2));
         return $this->importGoodsBillService->detail($id,2);
     }
     public function updateStatus($id){
