@@ -60,8 +60,7 @@ class SellingBillController extends Controller
 
     public function index(Request $request)
     {
-        $agency_id = auth()->user()->agency_id;
-        $result = $this->service->selectList($agency_id, $request->get('limit'), auth()->user()->role);
+        $result = $this->service->selectList($request->get('limit'));
 
         foreach($result as $key => $bill){
             $result[$key]->status_confirm = SellingBillStatus::getStatusText($bill->status_confirm);
