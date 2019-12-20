@@ -13,33 +13,40 @@ class ImportGoodsBillService
     {
         return importGoodBill::create($request);
     }
-    public function selectList($request,$role)
+    public function selectList($limit = 10)
     {
-        $limit = $request->get('limit', 10);
-        $importGoodBill = ImportGoodBill::
-        select('import_good_bills.id', 'vendors.name', 'import_good_bills.status', 'import_good_bills.total_paid', 'import_good_bills.created_at')
-        ->join('users', function($q)
-        {
-           $q->on('import_good_bills.created_by', 'users.id')
-               ->join('agencies', 'users.agency_id', '=', 'agencies.id');
-        })
-        ->join('vendors', 'import_good_bills.vendor_id', '=', 'vendors.id');
-        switch($role){
-            case 2:
-                $importGoodBill->where('status',0);
+        $currentUser = auth()->user();
+
+        $query = ImportGoodBill::with([
+            'vendor:id,name', 
+            'createdUser:id,name',
+            ]);
+        
+        if(!in_array($currentUser->role, [
+            UserRolesStatic::ADMIN,
+            UserRolesStatic::MANAGER,
+            UserRolesStatic::ASSISTANT,
+
+        ]) ){
+            $query->where('agency_id', $currentUser->agency_id);
+        }
+
+        switch($currentUser->role){
+            case UserRolesStatic::BUSINESS_STAFF:
+                $query->where('status', 0)
+                    ->orWhere('status', 1)
+                    ->orderBy('status', 'asc');
             break;
-            case 4:
-                $importGoodBill->where('status', 0)
-                ->orWhere('status', 1);
-            break;
-            case 5:
-                $importGoodBill->where('status', 1)
-                ->orWhere('status', 2);
+            case UserRolesStatic::WAREHOUSE_STAFF:
+                $query->where('status', 1)
+                    ->orWhere('status', 2)
+                    ->orderBy('status', 'asc');
             break;
         }
-        $importGoodBillSQL = $importGoodBill->paginate($limit);
+        $importGoodBills = $query->orderBy('id', 'desc')
+            ->paginate($limit);
 
-        return  $importGoodBillSQL;
+        return  $importGoodBills;
     }
 
     public function detail($id,$role)

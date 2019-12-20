@@ -17,7 +17,7 @@ class StatisticController extends Controller
     public function overviewStatistic(Request $request) 
     {
         $agencyId = $request->get('agency_id');
-        $fromDate = $request->get('from_date');
+        $fromDate = $request->get('from_date', date('Y-m-01'));
         $toDate = $request->get('to_date');
 
         $user = auth()->user();
@@ -66,7 +66,7 @@ class StatisticController extends Controller
     public function sellingBillTrend(Request $request)
     {
         $agencyId = $request->get('agency_id');
-        $fromDate = $request->get('from_date');
+        $fromDate = $request->get('from_date', date('Y-m-01'));
         $toDate = $request->get('to_date');
 
         $user = auth()->user();
@@ -103,7 +103,7 @@ class StatisticController extends Controller
     public function sellingBillPaidTrend(Request $request)
     {
         $agencyId = $request->get('agency_id');
-        $fromDate = $request->get('from_date');
+        $fromDate = $request->get('from_date', date('Y-m-01'));
         $toDate = $request->get('to_date');
 
         $user = auth()->user();
@@ -140,7 +140,7 @@ class StatisticController extends Controller
     public function importBillSpendTrend(Request $request)
     {
         $agencyId = $request->get('agency_id');
-        $fromDate = $request->get('from_date');
+        $fromDate = $request->get('from_date', date('Y-m-01'));
         $toDate = $request->get('to_date');
 
         $user = auth()->user();
