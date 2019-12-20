@@ -4,9 +4,12 @@ namespace App\Http\Services;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\Helpers\Statics\UserRolesStatic;
+use Illuminate\Support\Facades\Hash;
 use App\Entities\User;
+use App\Helpers\Traits\UploadImageTrait;
 
 class UserService {
+    use UploadImageTrait;
     public function index($request)
     {
         $limit = $request->get('limit', 10);
@@ -49,9 +52,11 @@ class UserService {
             $data['agency_id'] = $currentUser->agency_id; 
         }
         
-        if($request->hasFile('image'))
+        $avatar = $request->file('avatar');
+        
+        if($request->hasFile('avatar'))
         {
-            $path = $this->upload($image);
+            $path = $this->upload($avatar);
             $data['avatar'] = $path;
         }
         

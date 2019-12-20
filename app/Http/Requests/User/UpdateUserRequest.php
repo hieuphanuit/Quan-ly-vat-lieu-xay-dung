@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests\User;
+use App\Helpers\Statics\UserRolesStatic;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,19 +28,17 @@ class UpdateUserRequest extends FormRequest
         $validRole = (string)UserRolesStatic::BUSINESS_STAFF . ',' .
             (string)UserRolesStatic::WAREHOUSE_STAFF;
 
-        if($user->role == UserRolesStatic::ASSISTANT){
+        if($user->role == UserRolesStatic::ASSISTANT || $user->role == UserRolesStatic::ADMIN){
             $validRole = ',' .(string)UserRolesStatic::AGENCY_MANAGER;
         }
-        if($user->role == UserRolesStatic::ASSISTANT){
-            
+        if($user->role == UserRolesStatic::MANAGER || $user->role == UserRolesStatic::ADMIN){
+            $validRole = ',' .(string)UserRolesStatic::ASSISTANT;
         }
 
         return [
-            'email' => 'required|email',
-            'name' => 'required|string',
-            'password' => 'required|string',
-            'phone' => 'required|string',
-            'role' => 'required|in:'.$validRole,
+            'name' => 'string',
+            'phone' => 'string',
+            'role' => 'in:'.$validRole,
         ];
 
     }

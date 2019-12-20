@@ -33,7 +33,7 @@ Route::group(['middleware' => 'api'], function () {
 
 
     Route::group([
-        'middleware' => 'auth.role:0',
+        'middleware' => 'auth.role:0,1,2,3,4',
         'prefix' => 'category'
     ],  function ($router) {
         Route::get('/', 'CategoryController@index');
@@ -102,7 +102,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:0',
+    'middleware' => 'auth.role:0,1,2,3',
     'prefix' => 'agency'
 ],  function ($router) {
     Route::get('/', 'AgencyController@index');
@@ -114,7 +114,7 @@ Route::group([
 });
 
 Route::group([
-   'middleware' => 'auth.role:0',
+   'middleware' => 'auth.role:0,1,2,3',
     'prefix' => 'vendor'
 ], function (){
     Route::post('/','VendorController@create');
@@ -137,7 +137,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:0',
+    'middleware' => 'auth.role:0,1,2,3',
      'prefix' =>  'user'
  ],function(){
      Route::post('/','UserController@create');
