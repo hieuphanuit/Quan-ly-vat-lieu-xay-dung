@@ -102,7 +102,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:0',
+    'middleware' => 'auth.role:0,1,2,3',
     'prefix' => 'agency'
 ],  function ($router) {
     Route::get('/', 'AgencyController@index');
@@ -137,8 +137,13 @@ Route::group([
 });
 
 Route::group([
+<<<<<<< HEAD
     'middleware' => 'auth.role:0,1,2,3',
      'prefix' =>  'user'
+=======
+    'middleware' => 'auth.role:0,3,1,2',
+    'prefix' =>  'user'
+>>>>>>> hieu_le
  ],function(){
      Route::post('/','UserController@create');
      Route::delete('/{id}','UserController@delete');
