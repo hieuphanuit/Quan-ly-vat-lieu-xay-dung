@@ -35,4 +35,9 @@ class SellingBill extends Model
         return $this->hasMany(SellingTransaction::class, 'selling_bill_id');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'created_by');
+    }
+
 }

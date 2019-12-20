@@ -32,17 +32,17 @@ class SellingTransactionsController extends Controller
         return $this->service->detail($id);
     }
 
-    public function getList(Request $request)
+    public function getList($id)
     {
-        $data = $request->all();
-        $result = $this->service->getList($data['selling_bill_id']);
+        $result = $this->service->getList($id);
 
-        return response()->json(['transactions' => $result]);
+        return response()->json($result);
     }
 
     public function create(Request $request)
     {
         $data = $request->all();
+        
         $sellingBill = SellingBill::where('id', $data['selling_bill_id'])->first();
         $totalDept = $sellingBill->total_amount - $sellingBill->total_paid;
         if($data['amount'] > $totalDept){

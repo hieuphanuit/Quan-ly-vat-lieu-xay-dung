@@ -56,7 +56,7 @@ class SellingTransactionsService
 
     public function getList(int $sellingBillId, $keyword = null)
     {
-        return SellingTransaction::where('selling_bill_id', $sellingBillId)->get();
+        return SellingTransaction::with('sellingBills.user')->where('selling_bill_id', $sellingBillId)->get();
     }
 
 }
