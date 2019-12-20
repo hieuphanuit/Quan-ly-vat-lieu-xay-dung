@@ -69,7 +69,7 @@ class SellingBillService
 
     public function selectList($limit = 10)
     {
-        $currentUser = auth();
+        $currentUser = auth()->user();
 
         $query = SellingBill::with('customer:id,name')
                 ->orderBy('status_confirm', 'asc')

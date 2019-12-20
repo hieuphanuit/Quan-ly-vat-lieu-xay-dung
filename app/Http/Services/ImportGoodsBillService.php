@@ -15,7 +15,7 @@ class ImportGoodsBillService
     }
     public function selectList($limit = 10)
     {
-        $currentUser = auth();
+        $currentUser = auth()->user();
 
         $query = ImportGoodBill::with([
             'vendor:id,name', 

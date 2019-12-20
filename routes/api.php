@@ -98,7 +98,7 @@ Route::group([
     //Route::delete('/{id}', 'SellingBillController@delete');
     Route::post('/{id}', 'ImportGoodsBillController@updateStatus');
     Route::get('/{id}','ImportGoodsBillController@detail')->where(['id' => '[0-9]+']);
-    Route::get('/list','ImportGoodsBillController@selectList');
+    Route::get('/list','ImportGoodsBillController@index');
 });
 
 Route::group([
