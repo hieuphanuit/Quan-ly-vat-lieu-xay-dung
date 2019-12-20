@@ -24,9 +24,6 @@ class UpdateCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'string|email',
-            'phone'=> 'string|min:10',
-            'in_debt_amount'=> 'integer|min:0'
         ];
     }
 }
