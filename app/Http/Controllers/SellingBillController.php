@@ -66,7 +66,7 @@ class SellingBillController extends Controller
             $result[$key]->status_confirm = SellingBillStatus::getStatusText($bill->status_confirm);
         }
 
-        return response()->json(['selling_bill' =>$result]);
+        return response()->json($result);
     }
 
     public function updateStatus($id)

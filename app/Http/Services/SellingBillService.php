@@ -83,6 +83,10 @@ class SellingBillService
         ]) ){
             $query->where('agency_id', $currentUser->agency_id);
         }
+
+        if($currentUser->role == UserRolesStatic::BUSINESS_STAFF) {
+            $query->where('status_confirm', 0);
+        }
       
         return $query->paginate($limit);
     }
