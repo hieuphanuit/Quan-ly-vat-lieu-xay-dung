@@ -33,7 +33,7 @@ Route::group(['middleware' => 'api'], function () {
 
 
     Route::group([
-        'middleware' => 'auth.role:0',
+        'middleware' => 'auth.role:0,1,2,3,4',
         'prefix' => 'category'
     ],  function ($router) {
         Route::get('/', 'CategoryController@index');
