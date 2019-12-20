@@ -20,7 +20,8 @@ class CreateSellingBillsTable extends Migration
             $table->unsignedInteger('customer_id')->index();
             $table->unsignedBigInteger('total_amount');
             $table->unsignedBigInteger('total_paid');
-            $table->unsignedTinyInteger('status');
+            $table->unsignedTinyInteger('status_paid')->default(0);
+            $table->unsignedTinyInteger('status_confirm')->default(0);
 
             $table->timestamps();
         });

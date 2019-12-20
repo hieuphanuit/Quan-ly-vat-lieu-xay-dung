@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 64);
             $table->string('unit', 64);
             $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('import_price');
             $table->timestamps();
         });
     }

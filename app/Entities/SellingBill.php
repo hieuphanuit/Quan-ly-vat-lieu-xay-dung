@@ -3,7 +3,6 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use App\SellingBillDetail;
 
 class SellingBill extends Model
 {
@@ -17,11 +16,23 @@ class SellingBill extends Model
         'total_amount',
         'total_paid',
         'customer_id',
-        'status'
+        'status_paid',
+        'status_confirm'
     ];
 
-    public function SellingBillDetail()
+    public function sellingBillDetail()
     {
         return $this->hasMany(SellingBillDetail::class, 'selling_bill_id');
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function sellingTransaction()
+    {
+        return $this->hasMany(SellingTransaction::class, 'selling_bill_id');
+    }
+
 }

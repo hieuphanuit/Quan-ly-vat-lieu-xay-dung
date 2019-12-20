@@ -29,7 +29,8 @@ class UserController extends Controller
 
     public function create(CreateUserRequest $request)
     {
-        return $this->service->create($request);
+        $result = $this->service->create($request);
+        return response()->json($result);
     }
 
     public function update(UpdateUserRequest $request)
@@ -39,5 +40,9 @@ class UserController extends Controller
     public function delete($id)
     {
         return $this->service->delete($id);
+    }
+    public function getUserInfor()
+    {
+        return response()->json(auth()->user());
     }
 }

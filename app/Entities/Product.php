@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Entities\AgencyProduct;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -12,7 +13,8 @@ class Product extends Model
     protected $fillable = [
         'name',
         'unit',
-        'price'
+        'price',
+        'import_price',
     ];
 
     public function categories()
@@ -23,5 +25,10 @@ class Product extends Model
     public function images()
     {
         return $this->hasMany(ProductImage::class, 'product_id');
+    }
+
+    public function agencyProduct()
+    {
+        return $this->hasOne(AgencyProduct::class, 'product_id');
     }
 }

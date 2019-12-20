@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Services;
 
+use App\Entities\SellingBill;
 use App\Entities\SellingTransaction;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
@@ -8,6 +9,8 @@ use Illuminate\Support\Facades\Response;
 
 class SellingTransactionsService
 {
+
+
     public function index($request)
     {
         $limit = $request->get('limit', 10);
@@ -26,14 +29,10 @@ class SellingTransactionsService
             ->json($SellingTransaction);
     }
 
-    public function create($request)
+    public function create($data)
     {
-       //return SellingTransaction::create($request);
-       $data = $request->all();
-       $SellingTransaction = SellingTransaction::create($data);
-      // SellingTransaction
-       return response()
-           ->json($SellingTransaction);
+        $SellingTransaction = SellingTransaction::create($data);
+        return $SellingTransaction;
     }
 
     public function update($request)
@@ -55,6 +54,10 @@ class SellingTransactionsService
             ->json('Success');
     }
 
+    public function getList(int $sellingBillId, $keyword = null)
+    {
+        return SellingTransaction::where('selling_bill_id', $sellingBillId)->get();
+    }
 
 }
 

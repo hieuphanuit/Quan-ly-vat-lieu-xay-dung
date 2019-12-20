@@ -4,10 +4,10 @@ namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AngencyProduct extends Model
+class AgencyProduct extends Model
 {
     //
-    protected $table = 'angency_product';
+    protected $table = 'agency_product';
 
     protected $fillable = [
         'agency_id',
