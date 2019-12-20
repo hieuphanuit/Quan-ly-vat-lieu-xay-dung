@@ -29,11 +29,11 @@ class CreateUserRequest extends FormRequest
         $validRole = (string)UserRolesStatic::BUSINESS_STAFF . ',' .
             (string)UserRolesStatic::WAREHOUSE_STAFF;
 
-        if($user->role == UserRolesStatic::ASSISTANT){
+        if($user->role == UserRolesStatic::ASSISTANT || $user->role == UserRolesStatic::ADMIN){
             $validRole = ',' .(string)UserRolesStatic::AGENCY_MANAGER;
         }
-        if($user->role == UserRolesStatic::ASSISTANT){
-            
+        if($user->role == UserRolesStatic::MANAGER || $user->role == UserRolesStatic::ADMIN){
+            $validRole = ',' .(string)UserRolesStatic::ASSISTANT;
         }
 
         return [

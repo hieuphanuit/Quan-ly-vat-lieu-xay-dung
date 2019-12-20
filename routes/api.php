@@ -137,7 +137,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth.role:0',
+    'middleware' => 'auth.role:0,1,2,3',
      'prefix' =>  'user'
  ],function(){
      Route::post('/','UserController@create');
