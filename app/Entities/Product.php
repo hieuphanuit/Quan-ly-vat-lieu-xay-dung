@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Entities\AgencyProduct;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model

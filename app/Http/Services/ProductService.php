@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use App\Entities\Product;
+use App\Entities\AgencyProduct;
 use App\Helpers\Traits\UploadImageTrait;
 use App\Helpers\Statics\UserRolesStatic;
 
@@ -47,6 +48,7 @@ class ProductService {
         }
 
         $user = auth()->user();
+        
         
         if(
             $user->role != UserRolesStatic::ADMIN 
