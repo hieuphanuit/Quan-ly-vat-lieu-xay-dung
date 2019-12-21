@@ -13,11 +13,5 @@ class Agency extends Model
         'name',
         'address',
         'phone',
-        'manager_id'
     ];
-
-    public function manager()
-    {
-        return $this->belongsTo(User::class, 'manager_id');
-    }
 }
