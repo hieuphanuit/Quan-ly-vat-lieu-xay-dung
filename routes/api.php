@@ -153,6 +153,7 @@ Route::group([
     'prefix' => 'selling-bill'
 ],  function ($router) {
     Route::get('/', 'SellingBillController@index');
+    Route::post('/', 'SellingBillController@create');
     Route::delete('/{id}', 'SellingBillController@delete');
     Route::post('/{id}', 'SellingBillController@updateStatus');     //warehouse staff
     Route::get('/{id}', 'SellingBillDetailController@index')->where(['id' => '[0-9]+']);
@@ -172,6 +173,14 @@ Route::group([
 ],  function ($router) {
     Route::post('', 'SellingTransactionsController@create');
 });
+
+Route::group([
+    //'middleware' => 'auth.role:0,5',      //business staff
+    'prefix' => 'selling-transactions'
+],  function ($router) {
+    Route::get('/{id}', 'SellingTransactionsController@getList');
+});
+
 
 Route::group([
     //'middleware' => 'auth.role:0',

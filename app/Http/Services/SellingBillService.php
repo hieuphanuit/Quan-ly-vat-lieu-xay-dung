@@ -75,14 +75,15 @@ class SellingBillService
                 ->orderBy('status_confirm', 'asc')
                 ->orderBy('id', 'desc');
 
-        if(!in_array($currentUser->role, [
-            UserRolesStatic::ADMIN,
-            UserRolesStatic::MANAGER,
-            UserRolesStatic::ASSISTANT,
+        // if(!in_array($currentUser->role, [
+        //     UserRolesStatic::ADMIN,
+        //     UserRolesStatic::MANAGER,
+        //     UserRolesStatic::ASSISTANT,
+        //     UserRoleStatic::BUSINESS_STAFF,
 
-        ]) ){
+        // ]) ){
             $query->where('agency_id', $currentUser->agency_id);
-        }
+       // }
 
         if($currentUser->role == UserRolesStatic::BUSINESS_STAFF) {
             $query->where('status_confirm', 0);
