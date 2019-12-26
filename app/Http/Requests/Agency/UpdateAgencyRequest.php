@@ -26,7 +26,15 @@ class UpdateAgencyRequest extends FormRequest
         return [
             'name' => 'string',
             'address' => 'string',
-            'phone' => 'string',
+            'phone' => 'required|string|max:10',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Không có tên đại lý!',
+            'phone.max'  => 'Số Điện thoại không đúng!',
         ];
     }
 }

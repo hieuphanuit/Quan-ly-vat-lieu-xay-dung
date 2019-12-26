@@ -26,8 +26,21 @@ class UpdateVendorRequest extends FormRequest
         return [
             'name' => 'string',
             'address' => 'string',
-            'phone' => 'string',
+            'phone' => 'string|max:10',
             'email' => 'email',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.email' => 'email không đúng định dạng',
+            'phone.max' => 'Số điện thoại không đúng',
         ];
     }
 }

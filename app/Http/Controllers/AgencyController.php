@@ -38,9 +38,9 @@ class AgencyController extends Controller
         return $this->service->create($request);
     }
 
-    public function update(UpdateAgencyRequest $request)
+    public function update(Request $request)
     {
-        return $this->service->update($request);
+        return $this->service->update($request);       
     }
     public function delete($id)
     {

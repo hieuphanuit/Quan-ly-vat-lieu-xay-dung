@@ -26,7 +26,17 @@ class CreateAgencyRequest extends FormRequest
         return [
             'name' => 'required|string',
             'address' => 'required|string',
-            'phone' => 'required|string',
+            'phone' => 'required|string|max:10',
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Không có tên đại lý!',
+            'phone.max'  => 'Số Điện thoại không đúng!',
+
         ];
     }
 }
