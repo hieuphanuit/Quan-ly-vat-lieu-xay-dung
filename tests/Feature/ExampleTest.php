@@ -17,5 +17,11 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
+
+        // $this->post('/api/auth/login', ['email' => 'Sally'])
+        //     ->assertStatus(422);
+
+        // $this->post('/api/auth/login', ['email' => 'Sally'])
+        //     ->assertStatus(302);
     }
 }
